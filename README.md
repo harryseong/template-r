@@ -44,3 +44,12 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Initial Setup Steps
+1. `npx create-react-app template-r --template typescript`
+2. `npm install sass`
+3. `npm install react-router-dom`
+4. `npm install react-redux`
+5. `npm install @reduxjs/toolkit`
+6. `npm install axios`
