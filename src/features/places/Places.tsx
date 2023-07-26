@@ -1,7 +1,32 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { RootState } from "../../app/store";
+import { Place, fetchPlacesThunk } from "./placesSlice";
+
 function Places() {
 
+    const placesState = useAppSelector((state: RootState) => state.places);
+    const places = useAppSelector((state: RootState) => state.places.value.places);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+
+        if (placesState.status === 'idle') {
+            dispatch(fetchPlacesThunk());
+        }
+
+        return () => {
+            // Cleanup code run when component is removed from page:
+        }
+    });
+
     return (
-        <div>THIS IS PLACES</div>
+        <div>
+            <h1>THIS IS PLACES</h1>
+            <>
+                {places.map((place: Place) => <div>{place.fullName}</div>)}
+            </>
+        </div>
     );
 }
 
