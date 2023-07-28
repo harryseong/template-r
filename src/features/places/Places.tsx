@@ -24,7 +24,7 @@ function Places() {
         <div>
             <h1>THIS IS PLACES</h1>
             <>
-                {places.map((place: Place) => <div>{place.fullName}</div>)}
+                {places.map((place: Place) => <div key={place.place_id}>{place.fullName}</div>)}
             </>
         </div>
     );
