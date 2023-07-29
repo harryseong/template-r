@@ -24,7 +24,7 @@ export interface PlacesState {
     value: {
         places: Place[],
     }
-    status: 'idle' | 'loading' | 'success' | 'failure';
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string
 }
 
@@ -46,24 +46,25 @@ export const placesSlice = createSlice({
     reducers: {
         setPlaces: (state, action: PayloadAction<Place[]>) => {
             state.value.places = action.payload;
-            state.status = 'success';
+            state.status = 'succeeded';
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchPlacesThunk.pending, state => {
-            state.status = 'loading';
-        })
-        builder.addCase(fetchPlacesThunk.fulfilled, (state, action) => {
-            const places = action.payload.data.sort((a: Place, b: Place) => a.order - b.order);
-            state.value.places = places;
-            state.error = '';
-            state.status = 'success';
-        })
-        builder.addCase(fetchPlacesThunk.rejected, (state, action) => {
-            state.value.places = [];
-            state.error = JSON.stringify(action.error.message);
-            state.status = 'failure';
-        })
+        builder
+            .addCase(fetchPlacesThunk.pending, state => {
+                state.status = 'loading';
+            })
+            .addCase(fetchPlacesThunk.fulfilled, (state, action) => {
+                const places = action.payload.data.sort((a: Place, b: Place) => a.order - b.order);
+                state.value.places = places;
+                state.error = '';
+                state.status = 'succeeded';
+            })
+            .addCase(fetchPlacesThunk.rejected, (state, action) => {
+                state.value.places = [];
+                state.error = JSON.stringify(action.error.message);
+                state.status = 'failed';
+            })
     }
 });
 
