@@ -9,6 +9,8 @@ function App() {
   return (
     <div className="App">
 
+      <div>This is a React template app.</div>
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AppLayout />}>
